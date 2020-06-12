@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Portfolio</title>
+    <style>
+      .main{
+        text-align :center
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="loading">
+      <p>Loading...</p>
+    </div>
+    <div class="main" id="mainContain" hidden>
+      <img id="profile"
+      height="150"
+      width="120">
+      <h2 id="fullName"></h2>
+      <h3>Love to explore</h3>
+      
+      <p id="bio"></p>
+      <p>Click me on <a id="githubLink">Github</a></p>
+      <h2><a href ="https://github.com/manishsayamee?tab=repositories">My projects</a></h2>
+      <a class="twitter-timeline" data-width="300" data-height="400" data-theme="light" href="https://twitter.com/manandharmanis?ref_src=twsrc%5Etfw">Tweets by manandharmanis</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <section>
+    
+       
+        <!-- <p><a id="repos">List</a></p>
+        < -->
+        <ul>
+          <li id="repos"></li>
+        </ul>
+      </section>
+    </div>
+
+    <script>
+      fetch('https://api.github.com/users/manishsayamee')
+      .then((response)=>response.json())
+      .then(function(data){
+        console.log(data)
+        document.getElementById('profile').src= data['avatar_url'];
+        document.getElementById('fullName').textContent = data['name'];
+        document.getElementById('bio').textContent = data['bio'];
+        document.getElementById('githubLink').href = data['html_url'];
+        // document.getElementById('linkId').href = data['repos_url'];
+        document.getElementById('mainContain').hidden = false;
+        document.getElementById('loading').hidden = true;
+        
+
+        // document.getElementById("")
+
+      })
+      fetch('https://api.github.com/users/manishsayamee/repos')
+      .then((response)=>response.json())
+      .then(function(data){
+        console.log(data.map(i=>i.name))
+        Document.getElementById('repos').textContent= data["name"]
+            })
+    </script>
+  </body>
+</html>
